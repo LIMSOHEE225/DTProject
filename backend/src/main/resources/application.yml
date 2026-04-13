@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: dt-server
+  datasource:
+    # MySQL 연동 설정 (dt_project 스키마 사용)
+    url: jdbc:mysql://localhost:3306/dt_project?serverTimezone=Asia/Seoul&useSSL=false
+    username: root
+    password: "1234"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  gemini:
+    api-key: "AIzaSyAhnXIU3uOwN9n4okzdU-bZVTonWL5Xojs"
+  jpa:
+    hibernate:
+      ddl-auto: update # 테이블 구조 자동 업데이트
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:
+    root: INFO
+    com.dtproduct.server: DEBUG
