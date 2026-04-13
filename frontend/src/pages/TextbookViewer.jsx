@@ -118,8 +118,8 @@ const TextbookViewer = () => {
     if (role === 'TEACHER' && userName !== '사용자') {
       const fetchStudents = async () => {
         try {
-          // 요청하신 대로 teacherName을 최우선으로 필터링
-          const res = await fetch(`http://localhost:8080/api/v1/students/teacher/${encodeURIComponent(userName)}`);
+          const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+          const res = await fetch(`${apiBaseUrl}/api/v1/students/teacher/${encodeURIComponent(userName)}`);
           if (res.ok) {
             const data = await res.json();
             // 학교명까지 일치하는지 한 번 더 필터링 (보안)
@@ -341,8 +341,9 @@ const TextbookViewer = () => {
 
   const fetchMonthlyReport = async (studentId) => {
     setIsAnalyzing(true);
+    const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
     try {
-      const res = await fetch(`http://localhost:8080/api/v1/reports/monthly/${studentId}`);
+      const res = await fetch(`${apiBaseUrl}/api/v1/reports/monthly/${studentId}`);
       if (res.ok) setMonthlyAnalysis(await res.json());
     } catch (e) { console.error(e); } finally { setIsAnalyzing(false); }
   };

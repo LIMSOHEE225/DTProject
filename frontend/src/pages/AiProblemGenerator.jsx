@@ -142,7 +142,8 @@ const AiProblemGenerator = ({ isModal = false, onClose, onShare, subjectId = '1'
 
             // 수학 교과서: 백엔드 AI 호출
             const subject = 'math';
-            const response = await fetch(`/api/v1/ai/generate-problems?grade=${teacherGrade}&subject=${subject}&chapter=${encodeURIComponent(config.chapter)}&level=${config.level}&count=${config.count}`);
+            const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+            const response = await fetch(`${apiBaseUrl}/api/v1/ai/generate-problems?grade=${teacherGrade}&subject=${subject}&chapter=${encodeURIComponent(config.chapter)}&level=${config.level}&count=${config.count}`);
             const data = await response.json();
             
             if (Array.isArray(data)) {
